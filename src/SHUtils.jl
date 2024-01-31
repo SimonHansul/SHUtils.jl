@@ -132,6 +132,21 @@ function lab(v::Vector{R}; kwargs...) where R <: Real
     return hcat(unique(fround.(v; kwargs...))...)
 end
 
+"""
+Write DataFrames to disc during loop. Will overwrite existing file if step == 1 and append if step > 1.
+$(TYPEDSIGNATURES)
+"""
+function wrappend(file::String, data::DataFrame, step::Int64)
+    if (isfile(file)==false)&(step>1)
+        error("Attempt to append to non-existing file: step>1 but file does not exist.")
+    end
+    if step == 1
+        CSV.write(file, data, append=false)
+    else
+        CSV.write(file, data, append=true)
+    end
+end
+
 export skipinf, 
 vectify,
 which_in,
