@@ -1,4 +1,8 @@
-module ShUtils
+module SHUtils
+
+using CSV
+using DataFrames
+using DocStringExtensions
 
 """
 Skip inifite values. 

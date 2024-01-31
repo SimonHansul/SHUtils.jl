@@ -1,4 +1,6 @@
 name = "SHUtils"
-uuid = "33909ee2-84bf-489f-9467-f5ce42801850"
-authors = ["SimonHansul <simonhansul@gmail.com>"]
-version = "0.1.0"
+
+[deps]
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+DocStringExtensions = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
