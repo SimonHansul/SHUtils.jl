@@ -1,4 +1,7 @@
 name = "SHUtils"
+uuid = "e51bc130-c106-11ee-0d50-756dfcaf3c49"
+authors = ["SimonHansul <47112277+SimonHansul@users.noreply.github.com>"]
+version = "0.1.0"
 
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
