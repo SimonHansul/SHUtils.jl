@@ -177,6 +177,7 @@ function read_W3C(file_path::AbstractString; kwargs...)
     core_data_str = join(core_data, "\n")
     core_data_table = CSV.File(IOBuffer(core_data_str); kwargs...) |> DataFrame
 
+    #=
     meta = [split(replace(x, "#" =>""), ",") for x in meta] 
 
     for entry in meta
@@ -185,7 +186,8 @@ function read_W3C(file_path::AbstractString; kwargs...)
         #FIXME: metadata can currently not be accessed using metadata(core_data_table)
         metadata!(core_data_table, key, value)
     end
-
+    =#
+    
     return core_data_table
 end
 
