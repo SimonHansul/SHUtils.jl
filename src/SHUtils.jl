@@ -200,6 +200,6 @@ drop_na!,
 replace_na!,
 get_treatment_names,
 lab,
-W3C
+read_W3C
 
 end # module ShUtils
