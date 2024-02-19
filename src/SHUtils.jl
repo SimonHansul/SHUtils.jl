@@ -191,6 +191,16 @@ function read_W3C(file_path::AbstractString; kwargs...)
     return core_data_table
 end
 
+"""
+Get positions of minimum values as BitVector.
+$(TYPEDSIGNATURES)
+"""
+function ismin(x::Vector{R}) where R <: Real
+    return x .== minimum(x)
+end
+
+
+
 export skipinf, 
 vectify,
 which_in,
@@ -202,6 +212,7 @@ drop_na!,
 replace_na!,
 get_treatment_names,
 lab,
-read_W3C
+read_W3C,
+ismin
 
 end # module ShUtils
