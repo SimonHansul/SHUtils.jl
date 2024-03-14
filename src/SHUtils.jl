@@ -45,10 +45,10 @@ $(TYPEDSIGNATURES)
 geomrange(a::Real, b::Real; length=50) = 10 .^ range(log10(a), log10(b); length=length)
 
 """
-Calculate difference along a vector, inserting 0. as first element.
+Calculate difference along a vector, inserting NaN as first element (analogous to Pandas' diff method).
 $(TYPEDSIGNATURES)
 """
-diffvec(x) = vcat([0.], diff(x))
+diffvec(x) = vcat([NaN], diff(x))
 
 """
 Formatted rounding to significant digits (omitting decimal point when appropriate). 
