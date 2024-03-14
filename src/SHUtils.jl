@@ -151,6 +151,56 @@ function wrappend(file::String, data::DataFrame, step::Int64)
     end
 end
 
+"""
+Read a csv including W3C-formatted metadata. Each line with metadata starts with a hashtag (#). 
+Additional kwargs are handed down to CSV.File:
+$(TYPEDSIGNATURES)
+"""
+function read_W3C(file_path::AbstractString; kwargs...)
+    meta = []
+    core_data = []
+
+    # Open the file for reading
+    open(file_path, "r") do file
+        for line in eachline(file)
+            # Check if the line starts with a hashtag
+            if startswith(line, "#")
+                # Process metadata
+                push!(meta, line)
+            else
+                # Process core data
+                push!(core_data, line)
+            end
+        end
+    end
+
+    core_data_str = join(core_data, "\n")
+    core_data_table = CSV.File(IOBuffer(core_data_str); kwargs...) |> DataFrame
+
+    #=
+    meta = [split(replace(x, "#" =>""), ",") for x in meta] 
+
+    for entry in meta
+        key = entry[1]
+        value = entry[2]
+        #FIXME: metadata can currently not be accessed using metadata(core_data_table)
+        metadata!(core_data_table, key, value)
+    end
+    =#
+    
+    return core_data_table
+end
+
+"""
+Get positions of minimum values as BitVector.
+$(TYPEDSIGNATURES)
+"""
+function ismin(x::Vector{R}) where R <: Real
+    return x .== minimum(x)
+end
+
+
+
 export skipinf, 
 vectify,
 which_in,
@@ -161,6 +211,8 @@ drop_na,
 drop_na!,
 replace_na!,
 get_treatment_names,
-lab
+lab,
+read_W3C,
+ismin
 
 end # module ShUtils
